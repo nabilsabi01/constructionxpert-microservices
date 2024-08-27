@@ -1,11 +1,13 @@
 package com.constructionxpert.taskmanagement.controller;
 
+import com.constructionxpert.taskmanagement.exception.ResourceNotFoundException;
 import com.constructionxpert.taskmanagement.model.Task;
 import com.constructionxpert.taskmanagement.service.TaskService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -17,33 +19,46 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<Task> getAllTasks() {
-        return taskService.getAllTasks();
+    public ResponseEntity<List<Task>> getAllTasks() {
+        List<Task> tasks = taskService.getAllTasks();
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
-    @GetMapping("/{taskId}")
-    public Task getTaskById(@PathVariable Long taskId) {
-        return taskService.getTaskById(taskId).orElseThrow();
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
+        Task task = taskService.getTaskById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Task with ID " + id + " not found"));
+        return new ResponseEntity<>(task, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/exists")
+    public ResponseEntity<Boolean> taskExists(@PathVariable Long id) {
+        boolean exists = taskService.taskExists(id);
+        return new ResponseEntity<>(exists, HttpStatus.OK);
     }
 
     @GetMapping("/project/{projectId}")
-    public List<Task> getTasksByProjectId(@PathVariable Long projectId) {
-        return taskService.getTasksByProjectId(projectId);
+    public ResponseEntity<List<Task>> getTasksByProjectId(@PathVariable Long projectId) {
+        List<Task> tasks = taskService.getTasksByProjectId(projectId);
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @PostMapping
-    public Task createTask(@RequestBody Task task) {
-        return taskService.createTask(task);
+    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+        Task createdTask = taskService.createTask(task);
+        return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{taskId}")
-    public Task updateTask(@PathVariable Long taskId, @RequestBody Task task) {
-        task.setId(taskId);
-        return taskService.updateTask(task);
+    @PutMapping("/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) {
+        task.setId(id);
+        Task updatedTask = taskService.updateTask(task);
+        return new ResponseEntity<>(updatedTask, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{taskId}")
-    public void deleteTask(@PathVariable Long taskId) {
-        taskService.deleteTask(taskId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+        taskService.deleteTask(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
