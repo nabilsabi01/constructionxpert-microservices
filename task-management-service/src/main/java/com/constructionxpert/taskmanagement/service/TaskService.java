@@ -15,14 +15,6 @@ public class TaskService {
     private final RestTemplate restTemplate;
     private static final String PROJECT_SERVICE_URL = "http://project-management-service/api/projects";
 
-    public List<Task> getAllTasks() {
-        return taskRepository.findAll();
-    }
-
-    public Optional<Task> getTaskById(Long taskId) {
-        return taskRepository.findById(taskId);
-    }
-
     public TaskService(TaskRepository taskRepository, RestTemplate restTemplate) {
         this.taskRepository = taskRepository;
         this.restTemplate = restTemplate;
@@ -33,6 +25,18 @@ public class TaskService {
         if (Boolean.FALSE.equals(projectExists)) {
             throw new ProjectNotFoundException("Project with ID " + projectId + " does not exist");
         }
+    }
+
+    public boolean taskExists(Long taskId) {
+        return taskRepository.existsById(taskId);
+    }
+
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
+    }
+
+    public Optional<Task> getTaskById(Long taskId) {
+        return taskRepository.findById(taskId);
     }
 
     public List<Task> getTasksByProjectId(Long projectId) {
