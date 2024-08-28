@@ -1,19 +1,52 @@
-# ConstructionXpert Services - Microservices
+# ConstructionXpert Services 🏗️
 
-ConstructionXpert Services est une application de gestion de projets de construction développée en utilisant une architecture microservices. Ce projet est conçu pour améliorer l'évolutivité, la maintenabilité et la résilience de l'application. Chaque microservice gère une partie distincte des fonctionnalités, et ils communiquent entre eux via des API RESTful sécurisées.
+Bienvenue dans le projet ConstructionXpert Services ! Cette application de gestion de projets de construction est basée sur une architecture microservices pour assurer une meilleure évolutivité, maintenabilité et résilience.
 
-## Structure du Projet
+## 📚 Table des matières
 
-Le dépôt contient les services suivants :
+- [Vue d'ensemble](#vue-densemble)
+- [Microservices](#microservices)
+- [Technologies utilisées](#technologies-utilisées)
+- [Prérequis](#prérequis)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Utilisation](#utilisation)
+- [Tests](#tests)
+- [Déploiement](#déploiement)
+- [Contribution](#contribution)
+- [Licence](#licence)
 
-- **project-service** : Gère la création, la mise à jour, la suppression et l'affichage des projets de construction. Il stocke les informations relatives aux projets, telles que le nom, la description, les dates de début et de fin, et le budget.
+## 🌐 Vue d'ensemble
 
-- **task-service** : Gère les tâches associées aux projets. Il permet la création, la mise à jour, la suppression et l'affichage des tâches, en spécifiant des détails tels que la description, les dates, le statut, et les ressources nécessaires.
+ConstructionXpert Services est une application de gestion de projets de construction composée de plusieurs microservices interconnectés. Chaque service gère une partie spécifique des fonctionnalités de l'application, communiquant via des API RESTful sécurisées.
 
-- **resource-service** : Gère les ressources utilisées dans les projets de construction. Il permet d'ajouter, de mettre à jour, de supprimer et d'afficher les ressources, y compris leurs détails tels que le nom, le type, la quantité, et les informations du fournisseur.
+## 🧩 Microservices
 
-- **eureka-service** : Fournit le service de découverte (Service Registry) pour les microservices. Il permet aux services de s'enregistrer et de se découvrir mutuellement, facilitant ainsi la communication dynamique entre eux.
+1. **Service de Gestion des Projets** 📊
+   - Création, affichage, mise à jour et suppression de projets
 
-## Configuration et Déploiement
+2. **Service de Gestion des Tâches** ✅
+   - Gestion des tâches associées aux projets
 
-2. **Migrations de Base de Données** : Chaque microservice dispose de sa propre base de données, et Flyway est utilisé pour gérer les migrations de schéma de manière versionnée.
+3. **Service de Gestion des Ressources** 🛠️
+   - Gestion des ressources nécessaires aux projets
+
+4. **Service Registry/Discovery (Eureka)** 🔍
+   - Enregistrement et découverte dynamique des services
+
+## 🛠️ Technologies utilisées
+
+- Java 21
+- Spring Boot 3.3.3
+- Spring Cloud
+- Maven
+- MySQL
+- Flyway
+- Eureka
+- Postman (pour les tests API)
+
+## 📋 Prérequis
+
+- JDK 21
+- Maven 3.8+
+- MySQL 8+
