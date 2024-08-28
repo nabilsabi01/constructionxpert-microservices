@@ -8,13 +8,6 @@ Bienvenue dans le projet ConstructionXpert Services ! Cette application de gesti
 - [Microservices](#microservices)
 - [Technologies utilisées](#technologies-utilisées)
 - [Prérequis](#prérequis)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Utilisation](#utilisation)
-- [Tests](#tests)
-- [Déploiement](#déploiement)
-- [Contribution](#contribution)
-- [Licence](#licence)
 
 ## 🌐 Vue d'ensemble
 
